@@ -1,0 +1,21 @@
+version: '3'
+services:
+  customer:
+    build: .
+    ports:
+      - "8300:8300"
+    depends_on:
+      - database_customer
+  database_customer:
+    container_name: 'mysql_customer'
+    image: mysql
+    environment:
+      MYSQL_ROOT_PASSWORD: password
+      MYSQL_ALLOW_EMPTY_PASSWORD: 1
+      MYSQL_PASSWORD: password
+      MYSQL_USER: user
+      MYSQL_DATABASE: sylwiacustomer
+    ports:
+      - "3307:3306"
+    restart: always
+

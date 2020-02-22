@@ -1,0 +1,56 @@
+  version: '3'
+  services:
+    credit:
+      build: ./zadanie-sylwia-credit
+      ports:
+        - 8301:8301
+      depends_on:
+        - database_credit
+        - customer
+        - product
+    customer:
+      build: ./zadanie-sylwia-customer
+      ports:
+      - 8300:8300
+      depends_on:
+        - database_customer
+    product:
+      build: ./zadanie-sylwia-product
+      ports:
+        - 8302:8302
+      depends_on:
+        - database_product
+    database_credit:
+      container_name: 'mysql_credit'
+      image: mysql
+      environment:
+        MYSQL_ROOT_PASSWORD: password
+        MYSQL_PASSWORD: password
+        MYSQL_USER: user
+        MYSQL_DATABASE: sylwiacredit
+      ports:
+        - 3309:3306
+      restart: always
+    database_customer:
+      container_name: 'mysql_customer'
+      image: mysql
+      environment:
+        MYSQL_ROOT_PASSWORD: password
+        MYSQL_PASSWORD: password
+        MYSQL_USER: user
+        MYSQL_DATABASE: sylwiacustomer
+      ports:
+        - 3307:3306
+      restart: always
+    database_product:
+      container_name: 'mysql_product'
+      image: mysql
+      environment:
+        MYSQL_ROOT_PASSWORD: password
+        MYSQL_PASSWORD: password
+        MYSQL_USER: user
+        MYSQL_DATABASE: sylwiaproduct
+      ports:
+        - 3308:3306
+      restart: always
+
